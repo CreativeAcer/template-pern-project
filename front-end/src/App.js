@@ -1,6 +1,12 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+
+// Styled components import
+import CustomizedSlider from "./styled_components/slider";
+
 const API = process.env.REACT_APP_API_URL;
+
+
 
 console.log(API);
 function App() {
@@ -23,6 +29,7 @@ function App() {
           <li key={day.name}>{day.name}</li>
         ))}
       </ul>
+      <CustomizedSlider defaultValue={30} />
     </div>
   );
 }
