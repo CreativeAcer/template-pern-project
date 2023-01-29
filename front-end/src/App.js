@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 // Styled components import
 import CustomizedSlider from "./styled_components/slider";
 
+// app componenst
+import TopAppBar from "./topappbar/topappbar";
+
 const API = process.env.REACT_APP_API_URL;
 
 
@@ -24,6 +27,7 @@ function App() {
   }, []);
   return (
     <div>
+      <TopAppBar></TopAppBar>
       <ul>
         {days.map((day) => (
           <li key={day.name}>{day.name}</li>
