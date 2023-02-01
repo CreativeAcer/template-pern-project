@@ -1,11 +1,19 @@
 import axios from "axios";
+import React from 'react';
 import { useState, useEffect } from "react";
+
+/**
+ * MSAL
+ */
+import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
 
 // Styled components import
 import CustomizedSlider from "./styled_components/slider";
 
 // app componenst
-import TopAppBar from "./topappbar/topappbar";
+import TopAppBar from "./components/topappbar";
+import Login from "./components/loginpage";
+import Main from "./components/mainpage";
 
 const API = process.env.REACT_APP_API_URL;
 
@@ -26,15 +34,17 @@ function App() {
       .catch((c) => console.warn("catch", c));
   }, []);
   return (
-    <div>
-      <TopAppBar></TopAppBar>
-      <ul>
-        {days.map((day) => (
-          <li key={day.name}>{day.name}</li>
-        ))}
-      </ul>
-      <CustomizedSlider defaultValue={30} />
-    </div>
+    <React.Fragment>
+        <AuthenticatedTemplate>
+          <TopAppBar></TopAppBar>
+          {/* <Main></Main> */}
+          <CustomizedSlider defaultValue={30} />
+        </AuthenticatedTemplate>
+        <UnauthenticatedTemplate>
+          <div>PLEASE SIGN IN</div>
+          <Login></Login>
+        </UnauthenticatedTemplate>
+      </React.Fragment> 
   );
 }
 
