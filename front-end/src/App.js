@@ -37,7 +37,7 @@ function App() {
     <React.Fragment>
         <AuthenticatedTemplate>
           <TopAppBar></TopAppBar>
-          {/* <Main></Main> */}
+          <Main></Main>
           <CustomizedSlider defaultValue={30} />
         </AuthenticatedTemplate>
         <UnauthenticatedTemplate>
