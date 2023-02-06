@@ -1,172 +1,141 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+import { useState } from 'react';
+/**
+ * Mantine
+ */
+import { createStyles, Header, Container, Group, Burger, Paper, Transition } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+/**
+ * REACT ROUTER
+ */
+import { Link, useNavigate } from 'react-router-dom';
 
 /**
  * MSAL
  */
 import { useIsAuthenticated } from "@azure/msal-react";
 
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const HEADER_HEIGHT = 60;
+const links = [
+  { link: "/all", label: "ALL" },
+  { link: "/mob", label: "MOB" },
+  { link: "/vob", label: "VOB" },
+  { link: "/mte", label: "MTE" }
+];
 
-function TopAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+const useStyles = createStyles((theme) => ({
+  root: {
+    position: 'relative',
+    zIndex: 1,
+  },
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+  dropdown: {
+    position: 'absolute',
+    top: HEADER_HEIGHT,
+    left: 0,
+    right: 0,
+    zIndex: 0,
+    borderTopRightRadius: 0,
+    borderTopLeftRadius: 0,
+    borderTopWidth: 0,
+    overflow: 'hidden',
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+    [theme.fn.largerThan('sm')]: {
+      display: 'none',
+    },
+  },
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: '100%',
+  },
+
+  links: {
+    [theme.fn.smallerThan('sm')]: {
+      display: 'none',
+    },
+  },
+
+  burger: {
+    [theme.fn.largerThan('sm')]: {
+      display: 'none',
+    },
+  },
+
+  link: {
+    display: 'block',
+    lineHeight: 1,
+    padding: '8px 12px',
+    borderRadius: theme.radius.sm,
+    textDecoration: 'none',
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[7],
+    fontSize: theme.fontSizes.sm,
+    fontWeight: 500,
+
+    '&:hover': {
+      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+    },
+
+    [theme.fn.smallerThan('sm')]: {
+      borderRadius: 0,
+      padding: theme.spacing.md,
+    },
+  },
+
+  linkActive: {
+    '&, &:hover': {
+      backgroundColor: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).background,
+      color: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).color,
+    },
+  },
+}));
+
+
+const TopAppBar = (props) => {
+  const [opened, { toggle, close }] = useDisclosure(false);
+  const [active, setActive] = useState(links[0].link);
+  const { classes, cx } = useStyles();
+
+  const items = links.map((link) => (
+    <Link
+      key={link.label}
+      to={link.link}
+      className={cx(classes.link, { [classes.linkActive]: active === link.link })}
+      onClick={(event) => {
+        setActive(link.link);
+        close();
+      }}
+    >
+      {link.label}
+    </Link>
+  ));
 
   const isAuthenticated = useIsAuthenticated();
+  const navigate = useNavigate();
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
+    <React.Fragment>
+      <Header height={HEADER_HEIGHT} mb={120} className={classes.root}>
+        <Container className={classes.header}>
+          <h3>logo</h3>
+          <Group spacing={5} className={classes.links}>
+            {items}
+          </Group>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
-          {isAuthenticated ? (
-             <Box sx={{ flexGrow: 0 }}>
-             <Tooltip title="Open settings">
-               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-               </IconButton>
-             </Tooltip>
-             <Menu
-               sx={{ mt: '45px' }}
-               id="menu-appbar"
-               anchorEl={anchorElUser}
-               anchorOrigin={{
-                 vertical: 'top',
-                 horizontal: 'right',
-               }}
-               keepMounted
-               transformOrigin={{
-                 vertical: 'top',
-                 horizontal: 'right',
-               }}
-               open={Boolean(anchorElUser)}
-               onClose={handleCloseUserMenu}
-             >
-               {settings.map((setting) => (
-                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                   <Typography textAlign="center">{setting}</Typography>
-                 </MenuItem>
-               ))}
-             </Menu>
-           </Box>
-          ): null }
-    
-         
-        </Toolbar>
-      </Container>
-    </AppBar>
+          <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
+
+          <Transition transition="pop-top-right" duration={200} mounted={opened}>
+            {(styles) => (
+              <Paper className={classes.dropdown} withBorder style={styles}>
+                {items}
+              </Paper>
+            )}
+          </Transition>
+        </Container>
+      </Header>
+    </React.Fragment>
   );
   }
 export default TopAppBar;

@@ -10,20 +10,14 @@ import reportWebVitals from './reportWebVitals';
 import { MsalProvider } from "@azure/msal-react";
 import { PublicClientApplication } from "@azure/msal-browser";
 import { msalConfig } from "./authConfig";
-/**
-* REACT ROUTER
-*/
-//import { BrowserRouter } from 'react-router-dom';
+
+
 
 export const msalInstance = new PublicClientApplication(msalConfig);
 
 const AppProvider = () => (
   <MsalProvider instance={msalInstance}>
-    {/* <BrowserRouter> */}
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    {/* </BrowserRouter> */}
+    <App></App>
   </MsalProvider>
 );
 

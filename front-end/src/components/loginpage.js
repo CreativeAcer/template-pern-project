@@ -10,7 +10,7 @@ const Login = (props) => {
     const { instance, inProgress } = useMsal();
 
     if (inProgress === "login") {
-        return <span>Login is currently in progress!</span>
+        return (<span>Login is currently in progress!</span>)
     } else {
         return (
             <Button onClick={() => instance.loginPopup({})}>Login</Button>
