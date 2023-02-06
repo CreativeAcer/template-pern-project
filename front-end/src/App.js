@@ -2,7 +2,7 @@ import axios from "axios";
 import React from 'react';
 import { useState, useEffect } from "react";
 
-import { MantineProvider } from '@mantine/core';
+import { Footer, MantineProvider } from '@mantine/core';
 
 /**
  * MSAL
@@ -28,6 +28,7 @@ import MainCombined from './components/Combined/mainComboned';
 import MainMob from './components/MOB/mainMob';
 import MainVob from './components/VOB/mainVOB';
 import MainMte from "./components/MTE/mainMTE";
+import NotFound from "./components/notfound";
 
 const API = process.env.REACT_APP_API_URL;
 
@@ -58,7 +59,7 @@ const App = (props) => {
                 <Route path="/mob" element={<MainMob/>}></Route>
                 <Route path="/vob" element={<MainVob/>}></Route>
                 <Route path="/mte" element={<MainMte/>}></Route>
-                <Route path="/*"></Route>
+                <Route path="/*" element={<NotFound/>}></Route>
               </Routes>
             </React.StrictMode>
           </BrowserRouter>
