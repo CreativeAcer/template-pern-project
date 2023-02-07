@@ -17,6 +17,7 @@ import { useIsAuthenticated } from "@azure/msal-react";
 
 const HEADER_HEIGHT = 60;
 const links = [
+  { link: "/", label: "HOME" },
   { link: "/all", label: "ALL" },
   { link: "/mob", label: "MOB" },
   { link: "/vob", label: "VOB" },
@@ -117,7 +118,7 @@ const TopAppBar = (props) => {
 
   return (
     <React.Fragment>
-      <Header height={HEADER_HEIGHT} mb={120} className={classes.root}>
+      <Header height={HEADER_HEIGHT} mb={0} className={classes.root}>
         <Container className={classes.header}>
           <h3>logo</h3>
           <Group spacing={5} className={classes.links}>

@@ -24,7 +24,8 @@ import {
 import Login from "./components/loginpage";
 import Main from "./components/mainpage";
 import TopAppBar from './components/topappbar';
-import MainCombined from './components/Combined/mainComboned';
+import MainCombined from './components/Combined/mainCombined';
+import HomeCombined from './components/Combined/pages/homeCombined';
 import MainMob from './components/MOB/mainMob';
 import MainVob from './components/VOB/mainVOB';
 import MainMte from "./components/MTE/mainMTE";
@@ -55,7 +56,9 @@ const App = (props) => {
             <React.StrictMode>
               <Routes>
                 <Route path="/" index element={<Main/>}></Route>
-                <Route path="/all" element={<MainCombined/>}></Route>
+                <Route path="/all" element={<MainCombined/>}>
+                  <Route path="/all/homecombined" element={<HomeCombined/>}></Route>
+                </Route>
                 <Route path="/mob" element={<MainMob/>}></Route>
                 <Route path="/vob" element={<MainVob/>}></Route>
                 <Route path="/mte" element={<MainMte/>}></Route>
@@ -65,7 +68,6 @@ const App = (props) => {
           </BrowserRouter>
         </AuthenticatedTemplate>
         <UnauthenticatedTemplate>
-          <div>PLEASE SIGN IN</div>
           <Login></Login>
         </UnauthenticatedTemplate>
       </MantineProvider>
