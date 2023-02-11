@@ -60,10 +60,10 @@ const mockdata = [
   { icon: IconCalendarStats, label: 'Releases' , link: '/all/homecombined'},
   { icon: IconUser, label: 'Account' , link: '/all/homecombined'},
   { icon: IconFingerprint, label: 'Security' , link: '/all/homecombined'},
-  { icon: IconSettings, label: 'Settings' , link: '/all/homecombined'},
+  { icon: IconSettings, label: 'Settings' , link: '/settings'},
 ];
 
-const NavbarVob = (props) => {
+const NavbarApp = (props) => {
   const [active, setActive] = useState(2);
   const navigate = useNavigate();
 
@@ -93,4 +93,4 @@ const NavbarVob = (props) => {
   );
 }
 
-export default NavbarVob;
+export default NavbarApp;

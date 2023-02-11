@@ -2,7 +2,7 @@ import axios from "axios";
 import React from 'react';
 import { useState, useEffect } from "react";
 
-import { Footer, MantineProvider } from '@mantine/core';
+import { BackgroundImage, MantineProvider } from '@mantine/core';
 
 /**
  * MSAL
@@ -31,42 +31,37 @@ import MainVob from './components/VOB/mainVOB';
 import MainMte from "./components/MTE/mainMTE";
 import NotFound from "./components/notfound";
 import HomeDashboard from "./components/Combined/pages/homeDashboard";
+import AppSettings from "./components/pages/settings";
 
-const API = process.env.REACT_APP_API_URL;
+import backImg from './assets/Cloudy.svg';
 
-console.log(API);
 const App = (props) => {
-  // const [days, setDays] = useState([]);
-  // useEffect(() => {
-  //   axios
-  //     .get(`${API}/test`)
-  //     .then(
-  //       (response) => {
-  //         setDays(response.data);
-  //       },
-  //       (error) => console.log("get", error)
-  //     )
-  //     .catch((c) => console.warn("catch", c));
-  // }, []);
+
   return (
     <React.Fragment>
       <MantineProvider withGlobalStyles withNormalizeCSS>
         <AuthenticatedTemplate>
           <BrowserRouter>
-            <TopAppBar></TopAppBar>
-            <React.StrictMode>
-              <Routes>
-                <Route path="/" index element={<Main/>}></Route>
-                <Route path="/all" element={<MainCombined/>}>
-                  <Route path="/all/homecombined" index element={<HomeCombined/>}></Route>
-                  <Route path="/all/homedashboard" element={<HomeDashboard/>}></Route>
-                </Route>
-                <Route path="/mob" element={<MainMob/>}></Route>
-                <Route path="/vob" element={<MainVob/>}></Route>
-                <Route path="/mte" element={<MainMte/>}></Route>
-                <Route path="/*" element={<NotFound/>}></Route>
-              </Routes>
-            </React.StrictMode>
+            <BackgroundImage
+              src={backImg}
+              radius="sm"
+            >
+              <TopAppBar></TopAppBar>
+              <React.StrictMode>
+                <Routes>
+                  <Route path="/" index element={<Main/>}></Route>
+                  <Route path="/all" element={<MainCombined/>}>
+                    <Route path="/all/homecombined" index element={<HomeCombined/>}></Route>
+                    <Route path="/all/homedashboard" element={<HomeDashboard/>}></Route>
+                  </Route>
+                  <Route path="/mob" element={<MainMob/>}></Route>
+                  <Route path="/vob" element={<MainVob/>}></Route>
+                  <Route path="/mte" element={<MainMte/>}></Route>
+                  <Route path="/settings" element={<AppSettings/>}></Route>
+                  <Route path="/*" element={<NotFound/>}></Route>
+                </Routes>
+              </React.StrictMode>
+            </BackgroundImage>
           </BrowserRouter>
         </AuthenticatedTemplate>
         <UnauthenticatedTemplate>
