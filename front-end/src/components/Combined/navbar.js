@@ -12,6 +12,8 @@ import {
   IconSwitchHorizontal,
 } from '@tabler/icons-react';
 
+import { useNavigate } from 'react-router-dom';
+
 const useStyles = createStyles((theme) => ({
   link: {
     width: 50,
@@ -46,25 +48,31 @@ function NavbarLink({ icon: Icon, label, active, onClick }) {
   );
 }
 
+
+  //   <UnstyledButton onClick={onClick} className={cx(classes.link, { [classes.active]: active })}>
+  //   <Icon stroke={1.5} />
+  // </UnstyledButton>
+
 const mockdata = [
-  { icon: IconHome2, label: 'Home' },
-  { icon: IconGauge, label: 'Dashboard' },
-  { icon: IconDeviceDesktopAnalytics, label: 'Analytics' },
-  { icon: IconCalendarStats, label: 'Releases' },
-  { icon: IconUser, label: 'Account' },
-  { icon: IconFingerprint, label: 'Security' },
-  { icon: IconSettings, label: 'Settings' },
+  { icon: IconHome2, label: 'Home', link: '/all/homecombined' },
+  { icon: IconGauge, label: 'Dashboard' , link: '/all/homedashboard'},
+  { icon: IconDeviceDesktopAnalytics, label: 'Analytics' , link: '/all/homecombined'},
+  { icon: IconCalendarStats, label: 'Releases' , link: '/all/homecombined'},
+  { icon: IconUser, label: 'Account' , link: '/all/homecombined'},
+  { icon: IconFingerprint, label: 'Security' , link: '/all/homecombined'},
+  { icon: IconSettings, label: 'Settings' , link: '/all/homecombined'},
 ];
 
 const NavbarAll = (props) => {
   const [active, setActive] = useState(2);
+  const navigate = useNavigate();
 
   const links = mockdata.map((link, index) => (
     <NavbarLink
       {...link}
       key={link.label}
       active={index === active}
-      onClick={() => setActive(index)}
+      onClick={() => {setActive(index); navigate(link.link)}}
     />
   ));
 

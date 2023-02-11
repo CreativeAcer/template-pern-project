@@ -30,6 +30,7 @@ import MainMob from './components/MOB/mainMob';
 import MainVob from './components/VOB/mainVOB';
 import MainMte from "./components/MTE/mainMTE";
 import NotFound from "./components/notfound";
+import HomeDashboard from "./components/Combined/pages/homeDashboard";
 
 const API = process.env.REACT_APP_API_URL;
 
@@ -57,7 +58,8 @@ const App = (props) => {
               <Routes>
                 <Route path="/" index element={<Main/>}></Route>
                 <Route path="/all" element={<MainCombined/>}>
-                  <Route path="/all/homecombined" element={<HomeCombined/>}></Route>
+                  <Route path="/all/homecombined" index element={<HomeCombined/>}></Route>
+                  <Route path="/all/homedashboard" element={<HomeDashboard/>}></Route>
                 </Route>
                 <Route path="/mob" element={<MainMob/>}></Route>
                 <Route path="/vob" element={<MainVob/>}></Route>

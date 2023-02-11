@@ -1,4 +1,5 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import NavbarAll from './navbar';
 
 
@@ -6,7 +7,7 @@ function MainCombined() {
   return (
     <React.Fragment>
         <NavbarAll></NavbarAll>
-        <h2>Combined</h2>
+        <Outlet/>
     </React.Fragment>
   );
 }
