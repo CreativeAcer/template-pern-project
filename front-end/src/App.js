@@ -2,7 +2,7 @@ import axios from "axios";
 import React from 'react';
 import { useState, useEffect } from "react";
 
-import { BackgroundImage, MantineProvider } from '@mantine/core';
+import { BackgroundImage, MantineProvider, ColorSchemeProvider, useMantineTheme } from '@mantine/core';
 
 /**
  * MSAL
@@ -34,40 +34,46 @@ import HomeDashboard from "./components/Combined/pages/homeDashboard";
 import AppSettings from "./components/pages/settings";
 
 import backImg from './assets/Cloudy.svg';
-
+// theme={{ colorScheme: 'dark' }}
 const App = (props) => {
+  const theme = useMantineTheme();
+  const [colorScheme, setColorScheme] = useState('dark');
+  const toggleColorScheme = (value) =>
+    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
 
   return (
     <React.Fragment>
-      <MantineProvider withGlobalStyles withNormalizeCSS>
-        <AuthenticatedTemplate>
-          <BrowserRouter>
-            <BackgroundImage
-              src={backImg}
-              radius="sm"
-            >
-              <TopAppBar></TopAppBar>
-              <React.StrictMode>
-                <Routes>
-                  <Route path="/" index element={<Main/>}></Route>
-                  <Route path="/all" element={<MainCombined/>}>
-                    <Route path="/all/homecombined" index element={<HomeCombined/>}></Route>
-                    <Route path="/all/homedashboard" element={<HomeDashboard/>}></Route>
-                  </Route>
-                  <Route path="/mob" element={<MainMob/>}></Route>
-                  <Route path="/vob" element={<MainVob/>}></Route>
-                  <Route path="/mte" element={<MainMte/>}></Route>
-                  <Route path="/settings" element={<AppSettings/>}></Route>
-                  <Route path="/*" element={<NotFound/>}></Route>
-                </Routes>
-              </React.StrictMode>
-            </BackgroundImage>
-          </BrowserRouter>
-        </AuthenticatedTemplate>
-        <UnauthenticatedTemplate>
-          <Login></Login>
-        </UnauthenticatedTemplate>
-      </MantineProvider>
+      <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+        <MantineProvider theme={{colorScheme}}  withGlobalStyles withNormalizeCSS>
+          <AuthenticatedTemplate>
+            <BrowserRouter>
+              <BackgroundImage
+                src={backImg}
+                radius="sm"
+              >
+                <TopAppBar></TopAppBar>
+                <React.StrictMode>
+                  <Routes>
+                    <Route path="/" index element={<Main/>}></Route>
+                    <Route path="/all" element={<MainCombined/>}>
+                      <Route path="/all/homecombined" index element={<HomeCombined/>}></Route>
+                      <Route path="/all/homedashboard" element={<HomeDashboard/>}></Route>
+                    </Route>
+                    <Route path="/mob" element={<MainMob/>}></Route>
+                    <Route path="/vob" element={<MainVob/>}></Route>
+                    <Route path="/mte" element={<MainMte/>}></Route>
+                    <Route path="/settings" element={<AppSettings/>}></Route>
+                    <Route path="/*" element={<NotFound/>}></Route>
+                  </Routes>
+                </React.StrictMode>
+              </BackgroundImage>
+            </BrowserRouter>
+          </AuthenticatedTemplate>
+          <UnauthenticatedTemplate>
+            <Login></Login>
+          </UnauthenticatedTemplate>
+        </MantineProvider>
+      </ColorSchemeProvider>
     </React.Fragment> 
   );
 }
