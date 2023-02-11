@@ -44,7 +44,7 @@ const App = (props) => {
   return (
     <React.Fragment>
       <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-        <MantineProvider theme={{colorScheme: colorScheme}, {primaryColor: 'yellow'}}  withGlobalStyles withNormalizeCSS>
+        <MantineProvider theme={{colorScheme}}  withGlobalStyles withNormalizeCSS>
           <AuthenticatedTemplate>
             <BrowserRouter>
               <BackgroundImage
