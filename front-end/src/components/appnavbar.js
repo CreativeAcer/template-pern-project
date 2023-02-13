@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useMsal } from "@azure/msal-react";
 import { Navbar, Center, Tooltip, UnstyledButton, createStyles, Stack } from '@mantine/core';
 import {
   IconHome2,
@@ -64,6 +65,7 @@ const mockdata = [
 ];
 
 const NavbarApp = (props) => {
+  const { instance, inProgress } = useMsal();
   const [active, setActive] = useState(2);
   const navigate = useNavigate();
 
@@ -86,7 +88,7 @@ const NavbarApp = (props) => {
       <Navbar.Section>
         <Stack justify="center" spacing={0}>
           <NavbarLink icon={IconSwitchHorizontal} label="Change account" />
-          <NavbarLink icon={IconLogout} label="Logout" />
+          <NavbarLink icon={IconLogout} onClick={() => instance.logoutPopup({})} label="Logout" />
         </Stack>
       </Navbar.Section>
     </Navbar>

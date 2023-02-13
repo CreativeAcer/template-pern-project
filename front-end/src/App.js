@@ -34,7 +34,12 @@ import HomeDashboard from "./components/Combined/pages/homeDashboard";
 import AppSettings from "./components/pages/settings";
 
 import backImg from './assets/Cloudy.svg';
-// theme={{ colorScheme: 'dark' }}
+
+// {colors: {
+//   brand: ['#F0BBDD', '#ED9BCF', '#EC7CC3', '#ED5DB8', '#F13EAF', '#F71FA7', '#FF00A1', '#E00890', '#C50E82', '#AD1374']
+//   },
+//   primaryColor: 'yellow'}
+
 const App = (props) => {
   const theme = useMantineTheme();
   const [colorScheme, setColorScheme] = useState('dark');
@@ -43,7 +48,7 @@ const App = (props) => {
 
   return (
     <React.Fragment>
-      <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+      <ColorSchemeProvider colorScheme={colorScheme, {primaryColor: 'orange'}} toggleColorScheme={toggleColorScheme}>
         <MantineProvider theme={{colorScheme}}  withGlobalStyles withNormalizeCSS>
           <AuthenticatedTemplate>
             <BrowserRouter>
