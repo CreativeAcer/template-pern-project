@@ -3,7 +3,7 @@ import { useState } from 'react';
 /**
  * Mantine
  */
-import { createStyles, Header, Container, Group, Burger, Paper, Transition } from '@mantine/core';
+import { createStyles, Header, Container, Group, Burger, Paper, Transition, Image} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 /**
  * REACT ROUTER
@@ -14,6 +14,8 @@ import { Link, useNavigate } from 'react-router-dom';
  * MSAL
  */
 import { useIsAuthenticated } from "@azure/msal-react";
+
+import appLogo from "../assets/logonobg.png"
 
 const HEADER_HEIGHT = 60;
 const links = [
@@ -120,7 +122,7 @@ const TopAppBar = (props) => {
     <React.Fragment>
       <Header height={HEADER_HEIGHT} mb={0} className={classes.root}>
         <Container className={classes.header}>
-          <h3>logo</h3>
+          <Image src={appLogo} alt='logo' width={85} />
           <Group spacing={5} className={classes.links}>
             {items}
           </Group>

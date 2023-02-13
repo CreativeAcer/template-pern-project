@@ -2,7 +2,7 @@ import React from 'react';
 import { useMsal } from "@azure/msal-react";
 
 import backgroundImg from '../assets/loginBack.svg';
-
+import appLogo from "../assets/logo.png"
 import {
     Paper,
     createStyles,
@@ -10,7 +10,8 @@ import {
     Title,
     Text,
     Container, 
-    Group
+    Group,
+    Image
   } from '@mantine/core';
 
   const useStyles = createStyles((theme) => ({
@@ -113,6 +114,8 @@ const Login = (props) => {
                     <Title order={2} className={classes.title} align="center" mt="md" mb={50}>
                         Welcome back to Something!
                     </Title>
+
+                    <Image radius="lg" src={appLogo} alt='logo' width={385} />
                     <Button onClick={() => instance.loginPopup({})} fullWidth mt="xl" size="md">
                         Login
                     </Button>
