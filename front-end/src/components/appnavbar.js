@@ -55,12 +55,12 @@ function NavbarLink({ icon: Icon, label, active, onClick }) {
   // </UnstyledButton>
 
 const mockdata = [
-  { icon: IconHome2, label: 'Home', link: '/all/homecombined' },
-  { icon: IconGauge, label: 'Dashboard' , link: '/all/homedashboard'},
-  { icon: IconDeviceDesktopAnalytics, label: 'Analytics' , link: '/all/homecombined'},
-  { icon: IconCalendarStats, label: 'Releases' , link: '/all/homecombined'},
-  { icon: IconUser, label: 'Account' , link: '/all/homecombined'},
-  { icon: IconFingerprint, label: 'Security' , link: '/all/homecombined'},
+  { icon: IconHome2, label: 'Home', link: '/' },
+  { icon: IconGauge, label: 'Dashboard' , link: '/dashboard'},
+  { icon: IconDeviceDesktopAnalytics, label: 'Analytics' , link: '/analytics'},
+  { icon: IconCalendarStats, label: 'Releases' , link: '/releases'},
+  { icon: IconUser, label: 'Account' , link: '/account'},
+  { icon: IconFingerprint, label: 'Security' , link: '/security'},
   { icon: IconSettings, label: 'Settings' , link: '/settings'},
 ];
 
