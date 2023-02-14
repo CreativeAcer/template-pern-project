@@ -3,6 +3,7 @@ import React from 'react';
 import { useState, useEffect } from "react";
 
 import { BackgroundImage, MantineProvider, ColorSchemeProvider, useMantineTheme } from '@mantine/core';
+import { useLocalStorage } from '@mantine/hooks';
 
 /**
  * MSAL
@@ -42,9 +43,14 @@ import backImg from './assets/Cloudy.svg';
 
 const App = (props) => {
   const theme = useMantineTheme();
-  const [colorScheme, setColorScheme] = useState('dark');
   const toggleColorScheme = (value) =>
     setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+
+    const [colorScheme, setColorScheme] = useLocalStorage({
+      key: 'dash-color-scheme',
+      defaultValue: 'light',
+      getInitialValueInEffect: true,
+    });
 
   return (
     <React.Fragment>

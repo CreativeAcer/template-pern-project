@@ -89,6 +89,7 @@ import {
 const Login = (props) => {
     const { instance, inProgress } = useMsal();
     const { classes } = useStyles();
+    
 
     if (inProgress === "login") {
         return (
@@ -112,7 +113,7 @@ const Login = (props) => {
             <div className={classes.wrapper}>
                 <Paper className={classes.form} radius={0} p={30}>
                     <Title order={2} className={classes.title} align="center" mt="md" mb={50}>
-                        Welcome back to Something!
+                        Welcome back to
                     </Title>
 
                     <Image radius="lg" src={appLogo} alt='logo' width={385} />
